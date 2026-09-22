@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Petualangan Labirin Angka - Game Offline Edukatif Anak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Grandstander:wght@600;800;900&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-app">
+    <!-- Floating Background Decor -->
+    <div class="sky-clouds">
+      <div class="cloud c1">☁️</div>
+      <div class="cloud c2">✨</div>
+      <div class="cloud c3">⭐</div>
+      <div class="cloud c4">🎈</div>
+    </div>
+
+    <!-- =========================================================
+         LAYAR 1: MAIN MENU (HOME SCREEN)
+    ========================================================= -->
+    <div id="screen-main-menu" class="game-screen active">
+      <div class="menu-content-card">
+        <div class="game-logo-box">
+          <div class="logo-emoji-trio">🦊 🧩 🔢</div>
+          <h1 class="game-title">PETUALANGAN<br><span class="highlight">LABIRIN ANGKA</span></h1>
+          <p class="game-tagline">Jelajahi Labirin, Hitung Angka & Taklukkan Tantangan!</p>
+        </div>
+
+        <!-- Selected Hero Preview on Menu -->
+        <div class="menu-hero-badge" id="btn-menu-hero" title="Klik untuk Ganti Karakter">
+          <div class="menu-hero-avatar" id="menu-avatar-icon">🦊</div>
+          <div class="menu-hero-info">
+            <span class="sub">Sahabat Petualang:</span>
+            <strong id="menu-hero-name">Kiki Si Rubah</strong>
+          </div>
+          <span class="btn-small-edit">Ganti 👤</span>
+        </div>
+
+        <!-- Main Menu Action Buttons -->
+        <div class="menu-buttons-group">
+          <button id="btn-play-game" class="huge-play-btn pulse-glow">
+            <span class="play-icon">▶</span>
+            <span>MULAI MAIN</span>
+          </button>
+          
+          <div class="menu-secondary-row">
+            <button id="btn-menu-levels" class="menu-bubble-btn">
+              <span>🗺️</span> Pilih Level
+            </button>
+            <button id="btn-menu-guide" class="menu-bubble-btn">
+              <span>📖</span> Cara Main
+            </button>
+            <button id="btn-menu-sound" class="menu-bubble-btn sound-toggle">
+              <span id="menu-sound-icon">🔊</span> Suara
+            </button>
+          </div>
+        </div>
+
+        <!-- Progress Mini Footer -->
+        <div class="menu-footer-progress">
+          <span id="menu-level-progress-text">🏆 Progres: Level 1 / 12 Terbuka</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================
+         LAYAR 2: LEVEL SELECTOR SCREEN (PETA LEVEL BERTAHAP)
+    ========================================================= -->
+    <div id="screen-level-select" class="game-screen">
+      <div class="level-select-container">
+        <div class="screen-header-bar">
+          <button class="back-circle-btn" id="btn-back-to-menu">◀</button>
+          <div class="screen-title-group">
+            <h2>🗺️ PETA PETUALANGAN</h2>
+            <p>Pilih level dan kalahkan semua labirin matematika!</p>
+          </div>
+          <div class="star-counter-pill">
+            <span>⭐</span> <strong id="total-stars-count">0 / 36</strong>
+          </div>
+        </div>
+
+        <!-- Worlds Tab / Island Carousel -->
+        <div class="level-worlds-carousel" id="worlds-carousel">
+          <!-- Di-generate otomatis oleh levels.js -->
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================
+         LAYAR 3: GAMEPLAY ARENA SCREEN
+    ========================================================= -->
+    <div id="screen-gameplay" class="game-screen">
+      <!-- Top In-Game Header -->
+      <header class="kids-header">
+        <button id="btn-game-back-to-map" class="back-circle-btn small" title="Kembali ke Peta">◀</button>
+
+        <div class="level-indicator-pill">
+          <span class="world-tag" id="hud-world-tag">Taman Angka</span>
+          <h2 class="level-title-text" id="hud-level-title">Level 1: Langkah Pertama</h2>
+        </div>
+
+        <div class="top-quick-buttons">
+          <button id="btn-sound-game" class="bubble-btn" title="Toggle Suara">🔊</button>
+          <button id="btn-help-game" class="bubble-btn" title="Panduan">💡 Bantuan</button>
+        </div>
+      </header>
+
+      <!-- Math Dashboard Strip: Target vs Nilai Kantong -->
+      <div class="math-dashboard-strip">
+        <!-- Target Goal -->
+        <div class="target-flag-card">
+          <span class="flag-label">🎯 TARGET GOAL</span>
+          <div class="target-number-box">
+            <span id="display-target" class="huge-number">6</span>
+          </div>
+          <span class="flag-sub">Capai angka ini saat di FINISH 🏁</span>
+        </div>
+
+        <!-- Current Value -->
+        <div class="current-basket-card">
+          <span class="basket-label">🎒 KANTONG ANGKA KAMU</span>
+          <div class="current-number-box">
+            <span id="display-current" class="huge-number">0</span>
+            <span id="diff-status-pill" class="status-pill need-more">Kurang 6 lagi!</span>
+          </div>
+          <div class="progress-bar-container">
+            <div id="math-progress-fill" class="progress-bar-fill"></div>
+          </div>
+        </div>
+
+        <!-- Equation Trail -->
+        <div class="equation-trail-card">
+          <span class="trail-label">📝 JEJAK PERHITUNGANMU:</span>
+          <div id="equation-bubbles" class="bubbles-scroller">
+            <span class="bubble-step start">Mulai: 0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Playfield: Sidebar + Maze Canvas -->
+      <main class="main-adventure-area">
+        <aside class="kids-sidebar">
+          <div class="magic-action-card">
+            <span class="card-headline">🪄 JURUS BANTUAN</span>
+            
+            <button id="btn-undo" class="magic-btn btn-undo" title="Batalkan 1 Langkah">
+              <span class="magic-emoji">↩️</span>
+              <div class="magic-text">
+                <strong>Mundur 1 Langkah</strong>
+                <small>Batal langkah / keluar dari buntu</small>
+              </div>
+            </button>
+
+            <button id="btn-hint" class="magic-btn btn-hint" title="Lihat Petunjuk Jalur">
+              <span class="magic-emoji">🔍</span>
+              <div class="magic-text">
+                <strong>Saran Jalur</strong>
+                <small>Sorot ubin yang mendekatkan</small>
+              </div>
+              <span class="magic-badge" id="hint-stock">3</span>
+            </button>
+
+            <button id="btn-reset" class="magic-btn btn-retry" title="Ulang Level Ini">
+              <span class="magic-emoji">🔄</span>
+              <div class="magic-text">
+                <strong>Ulang Level</strong>
+                <small>Reset ke titik Start</small>
+              </div>
+            </button>
+          </div>
+
+          <!-- Quick Level Restart & Status Pill -->
+          <div class="mascot-speech-card" id="mascot-notification-card">
+            <div class="mascot-face" id="mascot-speech-avatar">🦊</div>
+            <div class="speech-bubble" id="mascot-dialogue">
+              "Kelebihan angka? Belok dan cari ubin bertanda minus (-) ya!"
+            </div>
+          </div>
+        </aside>
+
+        <!-- Maze Viewport Stage -->
+        <div class="maze-stage-wrapper">
+          <div class="canvas-responsive-holder" id="canvas-container">
+            <canvas id="kids-maze-canvas"></canvas>
+            <div id="floating-emojis-layer" class="floating-emojis-layer"></div>
+          </div>
+
+          <!-- Touch D-Pad for Mobile/Tablet -->
+          <div class="child-dpad" id="touch-dpad">
+            <button class="arrow-pad-btn up" data-dir="up">🔼</button>
+            <div class="dpad-horiz">
+              <button class="arrow-pad-btn left" data-dir="left">◀️</button>
+              <button class="arrow-pad-btn right" data-dir="right">▶️</button>
+            </div>
+            <button class="arrow-pad-btn down" data-dir="down">🔽</button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- ==================== MODALS ==================== -->
+
+    <!-- Modal Pilih Karakter Hero -->
+    <div id="modal-hero" class="kids-modal-overlay hidden">
+      <div class="kids-modal-box">
+        <div class="modal-top">
+          <h2>🌟 PILIH SAHABAT PETUALANG</h2>
+          <button class="btn-close-circle" data-close="modal-hero">✕</button>
+        </div>
+        <p class="modal-sub">Pilih karakter favoritmu untuk menjelajahi labirin angka!</p>
+
+        <div class="hero-selector-grid" id="hero-cards-grid">
+          <!-- Diisi otomatis dari CHARACTERS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Cara Main -->
+    <div id="modal-guide" class="kids-modal-overlay hidden">
+      <div class="kids-modal-box modal-guide">
+        <div class="modal-top">
+          <h2>📖 PANDUAN CARA BERMAIN</h2>
+          <button class="btn-close-circle" data-close="modal-guide">✕</button>
+        </div>
+        <div class="guide-steps-list">
+          <div class="guide-card">
+            <span class="guide-num">1</span>
+            <span class="guide-ico">🎯</span>
+            <div>
+              <strong>Perhatikan Target Angka</strong>
+              <p>Di awal level, lihat angka Target. Saat tiba di kotak FINISH 🏁, angka di kantongmu harus pas sama persis!</p>
+            </div>
+          </div>
+          <div class="guide-card">
+            <span class="guide-num">2</span>
+            <span class="guide-ico">🏁</span>
+            <div>
+              <strong>Kotak Finish Murni Gerbang</strong>
+              <p>Kotak FINISH 🏁 tidak akan mengubah atau menambah angkamu, itu adalah garis akhir pemeriksaan!</p>
+            </div>
+          </div>
+          <div class="guide-card">
+            <span class="guide-num">3</span>
+            <span class="guide-ico">➖ ➕</span>
+            <div>
+              <strong>Kelebihan Nilai? Cari Ubin Minus (-)</strong>
+              <p>Jika tokomu melebihi target, cari lorong dengan ubin minus (-) untuk menguranginya kembali pas.</p>
+            </div>
+          </div>
+          <div class="guide-card">
+            <span class="guide-num">4</span>
+            <span class="guide-ico">🧱</span>
+            <div>
+              <strong>Hati-hati Lorong Buntu!</strong>
+              <p>Ada banyak jalan buntu di labirin! Gunakan tombol <strong>Mundur (↩️)</strong> jika terjebak.</p>
+            </div>
+          </div>
+        </div>
+        <button class="big-action-btn primary" data-close="modal-guide">MENGERTI, AYO BERMAIN! 🚀</button>
+      </div>
+    </div>
+
+    <!-- Modal Kemenangan Level -->
+    <div id="modal-win" class="kids-modal-overlay hidden">
+      <div class="kids-modal-box celebration-box">
+        <div class="confetti-burst">🎉 🎊 ⭐ 🎈</div>
+        <h2 class="win-title">HEBAT! LEVEL SELESAI!</h2>
+        <p class="win-subtitle" id="win-level-name">Level 1 Selesai dengan Sempurna!</p>
+
+        <div class="stars-trio">
+          <span class="star-pop">⭐</span>
+          <span class="star-pop star-big">⭐</span>
+          <span class="star-pop">⭐</span>
+        </div>
+
+        <div class="win-math-summary">
+          <span class="summary-tag">RUMUS MATEMATIKA YANG DIBENTUK:</span>
+          <div class="summary-equation-box" id="win-equation-display">0 + 2 + 4 = 6</div>
+        </div>
+
+        <div class="win-buttons-row">
+          <button id="btn-win-map" class="big-action-btn secondary">🗺️ Peta Level</button>
+          <button id="btn-win-replay" class="big-action-btn secondary">🔄 Main Lagi</button>
+          <button id="btn-win-next" class="big-action-btn primary pulse">Lanjut ➔</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Gagal / Target Belum Pas -->
+    <div id="modal-retry-fail" class="kids-modal-overlay hidden">
+      <div class="kids-modal-box fail-box">
+        <div class="fail-emoji">🤔</div>
+        <h2>NILAI BELUM PAS DENGAN TARGET!</h2>
+        <p id="fail-message-text">Angka di kantongmu belum cocok dengan syarat pintu finish.</p>
+        <p class="fail-hint">Tips: Mundur beberapa langkah atau cari ubin minus (-) / plus (+) untuk menyesuaikan tokomu!</p>
+        <div class="win-buttons-row">
+          <button id="btn-fail-undo" class="big-action-btn primary">↩️ Mundur 1 Langkah</button>
+          <button id="btn-fail-restart" class="big-action-btn secondary">🔄 Ulang Level</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/audio.js"></script>
+  <script src="js/levels.js"></script>
+  <script src="js/maze.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
