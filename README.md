@@ -1,4 +1,4 @@
-<img width="959" height="388" alt="image" src="https://github.com/user-attachments/assets/24380605-8f87-4a4d-9413-bd3880f100e6" />
+
 # 🧩 Nummazed
 
 > **Permainan puzzle berbasis angka yang menguji logika, ketelitian, dan kemampuan memecahkan masalah.**
@@ -15,45 +15,126 @@ Nama **Nummazed** merupakan gabungan dari kata **"Number"** dan **"Maze"**, yang
 
 ## 🎮 Fitur
 
-Beberapa fitur yang tersedia dalam **Nummazed** meliputi:
-
 * 🔢 Puzzle berbasis angka
 * 🧠 Permainan yang mengandalkan logika dan strategi
 * 🎯 Sistem permainan interaktif
+* ⌨️ Mendukung kontrol **WASD** dan **tombol panah**
 * 🔄 Dapat dimainkan kembali
 * 💻 Dibuat menggunakan bahasa pemrograman C++
-
-> Fitur akan terus dikembangkan seiring dengan perkembangan proyek.
 
 ---
 
 ## 🕹️ Cara Bermain
 
-Tujuan utama permainan adalah **menyelesaikan puzzle dengan mengikuti aturan yang telah ditentukan**.
-
-Secara umum, langkah permainan adalah:
+Tujuan utama **Nummazed** adalah menyelesaikan puzzle dengan mengikuti aturan permainan yang tersedia.
 
 1. Jalankan program **Nummazed**.
-2. Perhatikan susunan angka yang ditampilkan.
-3. Tentukan langkah yang ingin dilakukan.
-4. Masukkan pilihan sesuai dengan kontrol yang tersedia.
-5. Lanjutkan permainan hingga puzzle berhasil diselesaikan.
-6. Cobalah menyelesaikan puzzle dengan strategi yang lebih baik.
+2. Perhatikan susunan angka pada permainan.
+3. Gerakkan karakter menggunakan **WASD** atau **tombol panah**.
+4. Tentukan setiap langkah dengan mempertimbangkan posisi dan kondisi puzzle.
+5. Lanjutkan hingga tujuan permainan tercapai.
+6. Cobalah menemukan strategi yang efektif untuk menyelesaikan puzzle.
 
 ### 🎛️ Kontrol
 
-| Tombol  | Fungsi                  |
-| ------- | ----------------------- |
-| `↑`     | Bergerak ke atas        |
-| `↓`     | Bergerak ke bawah       |
-| `←`     | Bergerak ke kiri        |
-| `→`     | Bergerak ke kanan       |
-| `Enter` | Memilih / mengonfirmasi |
-| `Esc`   | Kembali / keluar        |
+| Tombol | Tombol Alternatif | Fungsi            |
+| :----: | :---------------: | ----------------- |
+|   `W`  |        `↑`        | Bergerak ke atas  |
+|   `A`  |        `←`        | Bergerak ke kiri  |
+|   `S`  |        `↓`        | Bergerak ke bawah |
+|   `D`  |        `→`        | Bergerak ke kanan |
 
-> **Catatan:** Bagian kontrol perlu disesuaikan dengan kontrol yang benar-benar digunakan oleh program.
+> **💡 Tips:** Kamu dapat menggunakan **WASD** maupun **tombol panah**, sehingga dapat memilih kontrol yang paling nyaman.
 
 ---
 
-## 🧠 Konsep Perma
+## 🧠 Konsep Permainan
 
+Nummazed menggabungkan beberapa elemen utama:
+
+### 🔢 Number
+
+Angka merupakan elemen utama dalam puzzle dan menjadi bagian penting dalam menentukan langkah pemain.
+
+### 🧩 Puzzle
+
+Pemain perlu menemukan solusi berdasarkan kondisi puzzle yang tersedia.
+
+### 🧠 Logika
+
+Pemain harus menganalisis keadaan permainan sebelum menentukan langkah berikutnya.
+
+### 🎯 Strategi
+
+Setiap langkah perlu dipertimbangkan agar pemain dapat menyelesaikan puzzle secara efektif.
+
+---
+
+## 🛠️ Teknologi
+
+Project ini dikembangkan menggunakan:
+
+* **C++**
+* Standard Library C++
+* Compiler C++
+
+---
+
+## 💻 Konsep Pemrograman
+
+Dalam pengembangannya, Nummazed menerapkan berbagai konsep dasar pemrograman, seperti:
+
+* **Variabel dan tipe data** untuk menyimpan data permainan.
+* **Percabangan** untuk menentukan tindakan berdasarkan kondisi tertentu.
+* **Perulangan** untuk menjalankan proses permainan.
+* **Array** untuk menyimpan dan mengelola data puzzle.
+* **Fungsi** untuk membuat kode lebih terstruktur.
+* **Algoritma** untuk mengatur mekanisme permainan dan pemrosesan puzzle.
+
+---
+
+## 🚀 Cara Menjalankan
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/wobblyorbee/Nummazed-.git
+```
+
+### 2. Masuk ke Folder Project
+
+```bash
+cd Nummazed-
+```
+
+### 3. Compile
+
+Jika menggunakan `g++`:
+
+```bash
+g++ main.cpp -o Nummazed
+```
+
+### 4. Jalankan
+
+Windows:
+
+```bash
+Nummazed.exe
+```
+
+Linux/macOS:
+
+```bash
+./Nummazed
+```
+
+---
+
+## 📸 Tampilan Permainan
+
+<img width="959" height="388" alt="image" src="https://github.com/user-attachments/assets/24380605-8f87-4a4d-9413-bd3880f100e6" />
+
+### Gameplay
+
+![Gameplay](assets/gameplay.png)
